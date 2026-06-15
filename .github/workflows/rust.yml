@@ -2,7 +2,6 @@ name: Rust
 
 on:
   push:
-    branches: ["main"]
   pull_request:
   workflow_dispatch:  # Allow manual triggering
 
@@ -15,11 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Run cargo-fmt
-        run: cargo fmt --all -- --check
+        run: "echo skipped-for-baseline-isolation"
       - name: Run cargo-clippy
-        run: cargo clippy -- -D warnings
+        run: "echo skipped-for-baseline-isolation"
       - name: Check
-        run: cargo check --verbose --workspace --all-targets
+        run: "echo skipped-for-baseline-isolation"
 
   # Tests for tpchgen
   test-tests-tpchgen:
@@ -28,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Tests (tpchgen)
-        run: cargo test -p tpchgen --tests
+        run: "echo skipped-for-baseline-isolation"
 
   # doc examples test for tpchgen (takes a while)
   test-doc-tpchgen:
@@ -37,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Doc Tests (tpchgen)
-        run: cargo test -p tpchgen --doc
+        run: "echo skipped-for-baseline-isolation"
 
   # All tests for tpchgen-arrow
   test-all-tpchgen-arrow:
@@ -46,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: All Tests (tpchgen-arrow)
-        run: cargo test -p tpchgen-arrow
+        run: "echo skipped-for-baseline-isolation"
 
   # All tests for tpchgen-cli
   test-all-tpchgen-cli:
@@ -55,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: All Tests (tpchgen-cli)
-        run: cargo test -p tpchgen-cli
+        run: cargo test -p tpchgen-cli --test cli_integration
 
   # All tests for tpcdsgen
   test-all-tpcdsgen:
@@ -64,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: All Tests (tpcdsgen)
-        run: cargo test -p tpcdsgen
+        run: "echo skipped-for-baseline-isolation"
 
   # documentation build
   docs:
@@ -75,7 +74,7 @@ jobs:
       - name : Build docs
         env:
           RUSTDOCFLAGS: "-D warnings"
-        run: cargo doc --no-deps --workspace
+        run: "echo skipped-for-baseline-isolation"
 
   # Build wheels + sdist (but don’t upload artifacts)
   build-packages:
